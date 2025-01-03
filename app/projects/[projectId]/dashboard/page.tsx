@@ -1,0 +1,74 @@
+"use client";
+import { Card, CardBody, CardHeader } from "@nextui-org/react";
+import { Heading } from "@/components/ui/heading";
+import { DashboardCardItems } from "@/components/ui/card/dashboard-card";
+import ProgressBar from "@/components/shared/multicolor-progress";
+import { CreateNewSuites } from "@/components/ui/model/dashboard.model";
+import { useEffect, useState } from "react";
+import { ApiTestSuitesList } from "@/apis/testSuitesApi";
+import { useParams } from "next/navigation";
+
+export default function ProjectDashboard() {
+
+  const [testSuitesList, setTestSuitesList ] = useState([])
+  const params = useParams()
+
+  console.log("params",params.projectId);
+  
+
+    const fetchProjectList = async () => {
+      try {
+        const result = await ApiTestSuitesList(93);
+        const projectData = result.map((data:any)=>({
+          id:data.id,
+          projectName:data.name,
+        }));
+        console.log("test Suites in dashboard",projectData);
+        
+        setTestSuitesList(projectData)
+      } catch (err) {
+        console.log("Error on fetch the test suites data", err);
+      }
+    };
+  
+    useEffect(() => {
+      fetchProjectList();
+    }, []);
+  
+  return (
+    <section className="flex flex-col grow md:py-3">
+      <div className="flex justify-between">
+        <Heading>Dashboard</Heading>
+        < CreateNewSuites/>
+      </div>
+      <div className="my-5">
+        <DashboardCardItems />
+      </div>
+      <Heading>Last Executions</Heading>
+      <div className="gap-2 my-5 grid sm:grid-cols-1 md:grid-cols-2">
+        <Card className="p-3">
+          <CardHeader className="flex justify-between">
+            <h4 className="text-base font-semibold text-textPrimary">
+              Smoke Test
+            </h4>
+            <span className="text-sm">Friday, Oct 21, 2024</span>
+          </CardHeader>
+          <CardBody className="">
+            <ProgressBar value1={94} value2={3} value3={1} />
+          </CardBody>
+        </Card>
+        <Card className="p-3">
+          <CardHeader className="flex justify-between">
+            <h4 className="text-base font-semibold text-textPrimary">
+              Regression Test
+            </h4>
+            <span className="text-sm">Monday, Oct 21, 2024</span>
+          </CardHeader>
+          <CardBody className="">
+            <ProgressBar value1={86} value2={12} value3={2} />
+          </CardBody>
+        </Card>
+      </div>
+    </section>
+  );
+}
