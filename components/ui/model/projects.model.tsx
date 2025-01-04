@@ -20,17 +20,21 @@ import { useState } from "react";
 
 export function CreateProject() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [isEnvironment, setIsEnviroment] = useState(1);
-  const [environmentValue, setEnviromentValue] = useState([1]);
+  const [isEnvironmentCount, setIsEnviromentCount] = useState(1);
+  const [environmentValue, setEnviromentValue] = useState([]);
 
   const onSave = () => {
     console.log("save is working");
   };
 
   const handleIncrease = () => {
-    console.log("action", environmentValue?.length >= 0);
+    console.log("action", environmentValue?.length >= 0,environmentValue?.length);
+    // setEnviromentValue(prev=>([...prev,{count:isEnvironmentCount}])))
+    setIsEnviromentCount(isEnvironmentCount+1)
   };
-  const handleDecrease = () => {};
+  const handleDecrease = () => {
+
+  };
 
   return (
     <>
@@ -97,7 +101,7 @@ export function CreateProject() {
                         {/* <ActionRemove /> */}
                       </Button>
                 </div>
-                {environmentValue?.length >= 0 &&
+                {environmentValue?.length > 0 &&
                   environmentValue.map((val, index) => (
                     <div className="flex justify-center items-end gap-2 mt-3">
                       <Input
