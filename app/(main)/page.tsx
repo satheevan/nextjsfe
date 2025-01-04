@@ -49,7 +49,7 @@ export default function Main() {
           <CreateProject />
         </div>
         <p></p>
-        <ProjectTable data={projects}/>
+        <ProjectTable data={projects.length>0?projects:[]}/>
       </main>
     </div>
   );
