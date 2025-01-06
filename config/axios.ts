@@ -1,11 +1,9 @@
 import axios from 'axios';
-import { ApiURL } from '@/apis/apiUrl';
 import Cookies from 'js-cookie'; // Assumes you're using js-cookie to manage cookies
 
 // Create an Axios instance
 const api = axios.create({
-  // baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // Use environment variable for API base URL
-  baseURL:ApiURL.BASE_URL,
+  baseURL: process.env?.NEXT_PUBLIC_API_BASE_URL, // Use environment variable for API base URL
   timeout: 10000, // Set timeout
 });
 

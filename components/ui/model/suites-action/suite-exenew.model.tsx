@@ -19,8 +19,10 @@ import {
     SelectItem,
   } from "@nextui-org/react";
   
-  export function CreateNewTest() {
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  export function CreateNewTest({ isOpenModal }: { isOpenModal: boolean }) {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure({
+      isOpen: isOpenModal
+    });
   
     const suites:any = [
       {label:"Suite1", value:"suite1"},
@@ -33,9 +35,9 @@ import {
   
     return (
       <>
-        <Button onPress={onOpen} className="bg-btnColorProject text-white">
+        {/* <Button onPress={onOpen} className="bg-btnColorProject text-white">
           Create New Test
-        </Button>
+        </Button> */}
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
           <ModalContent>
             {(onClose) => (

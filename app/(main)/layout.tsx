@@ -7,7 +7,7 @@ export default function DashBoard({
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex flex-col grow gap-1 py-8 md:py-0">
+    <section className="flex flex-col grow gap-1 md:py-0">
       <Navbar/>
       <div className="mx-8 flex grow">
         {children}

@@ -6,40 +6,47 @@ import ProgressBar from "@/components/shared/multicolor-progress";
 import { CreateNewSuites } from "@/components/ui/model/dashboard.model";
 import { useEffect, useState } from "react";
 import { ApiTestSuitesList } from "@/apis/testSuitesApi";
-import { useParams } from "next/navigation";
+import { fetchProjectStatistics } from "@/apis/projectApis";
+import { useProjectStore } from "@/store/project.store";
+import { number } from "zod";
+
+
 
 export default function ProjectDashboard() {
 
-  const [testSuitesList, setTestSuitesList ] = useState([])
-  const params = useParams()
+  const [testSuitesList, setTestSuitesList ] = useState([]);
+  const [testStats, setTestStats] = useState({});
+  const {currentProjectId}=useProjectStore()  
 
-  console.log("params",params.projectId);
-  
+  const fetchTestSuitesList = async () => {
+    try {
+      const projectData = await ApiTestSuitesList(currentProjectId);
+      console.log("test Suites in dashboard",projectData);
+      
+    } catch (err) {
+      console.log("Error on fetch the test suites data", err);
+    }
+  };
 
-    const fetchProjectList = async () => {
-      try {
-        const result = await ApiTestSuitesList(93);
-        const projectData = result.map((data:any)=>({
-          id:data.id,
-          projectName:data.name,
-        }));
-        console.log("test Suites in dashboard",projectData);
-        
-        setTestSuitesList(projectData)
-      } catch (err) {
-        console.log("Error on fetch the test suites data", err);
-      }
-    };
-  
-    useEffect(() => {
-      fetchProjectList();
-    }, []);
-  
+  const showProjectStatistics = async () => {
+    try {
+      const response = await fetchProjectStatistics(currentProjectId);
+      setTestStats(response);
+    } catch (err) {
+      console.log("Error on fetch the project statistics data", err);
+    }
+  }
+
+  useEffect(() => {
+    fetchTestSuitesList();
+    showProjectStatistics();
+  }, []);
+
   return (
     <section className="flex flex-col grow md:py-3">
       <div className="flex justify-between">
         <Heading>Dashboard</Heading>
-        < CreateNewSuites/>
+        <CreateNewSuites/>
       </div>
       <div className="my-5">
         <DashboardCardItems />

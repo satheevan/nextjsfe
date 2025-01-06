@@ -11,20 +11,21 @@ import {
 } from "@nextui-org/react";
 import { ActionEdit } from "../../../components/icons/actions";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Project } from "@/types/project";
+import { useProjectStore } from "@/store/project.store";
 
 const columns = [
   {
-    key: "projectName",
-    label: "Projects",
+    key: "name",
+    label: "Name",
   },
   {
-    key: "totalTest",
-    label: "Total Tests",
+    key: "description",
+    label: "Description",
   },
   {
-    key: "totalSuits",
-    label: "Total Suits",
+    key: "createdAt",
+    label: "Created at",
   },
   {
     key: "action",
@@ -35,63 +36,39 @@ interface ColumnData {
   key: string;
   label: string;
 }
-interface ChildProps {
-  columnValue: ColumnData[];
-}
-
-type Project = {
-  id: number;
-  projectName: string;
-  totalTest: number;
-  totalSuits:number;
-};
 
 interface ProjectTableProps {
   data: Project[]; // Array of user objects
+  onEditClick: (projectId: any) => void;
 }
 
-const TableView: React.FC<ProjectTableProps> = ({data}) => {
-  const router = useRouter();
+const ProjectsTableView: React.FC<ProjectTableProps> = ({ data, onEditClick }) => {
 
-  function action (id:any){
-    return(
-      <span onClick={() => {console.log("Id value",id)}}>
+  // const {setPro}
+
+  function action(id: any) {
+    return (
+      <span
+        onClick={() => {}}
+      >
         <ActionEdit size={21} width={24} height={24} />
       </span>
-    )
+    );
   }
-  const rowData = data.map((project)=>(
-    {
-      key:project?.id,
-      projectName: (
-        <Link
-          href={`/projects/${project.projectName}/dashboard`}
-          className="text-btnColorProject text-xs"
-        >
-          {project.projectName}
-        </Link>
-      ),
-      totalTest:project.totalTest,
-      totalSuits:project.totalSuits,
-      action:action(project.id) ,
-    }
-  ))
-  const rows = [
-    {
-      key: "1",
-      projectName: (
-        <Link
-          href={`/projects/inventory/dashboard`}
-          className="text-btnColorProject text-xs"
-        >
-          Inventory
-        </Link>
-      ),
-      totalTest: "500",
-      totalSuits: "25",
-      action: <ActionEdit size={21} width={24} height={24} />,
-    },
-  ];
+  const rowData = data.map((project) => ({
+    key: project?.id,
+    name: (
+      <Link
+        href={`/projects/${project?.id}/dashboard`}
+        className="text-btnColorProject text-xs"
+      >
+        {project?.name}
+      </Link>
+    ),
+    description: project.description,
+    createdAt: project.createdAt,
+    action: action(project.id),
+  }));
 
   return (
     <Table aria-label="Example table with dynamic content" className="mt-4">
@@ -101,7 +78,7 @@ const TableView: React.FC<ProjectTableProps> = ({data}) => {
       <TableBody items={rowData} className="">
         {(item) => (
           <TableRow key={item.key} className="">
-          {/* <TableRow key={item.key} className=""> */}
+            {/* <TableRow key={item.key} className=""> */}
             {(columnKey) => (
               <TableCell className="">{getKeyValue(item, columnKey)}</TableCell>
             )}
@@ -112,4 +89,4 @@ const TableView: React.FC<ProjectTableProps> = ({data}) => {
   );
 };
 
-export default TableView;
+export default ProjectsTableView;
