@@ -1,6 +1,6 @@
 "use client";
 import { ApiTestSuitesList } from "@/apis/testSuitesApi";
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/ui/navbar";
 import LeftSideNav from "@/components/ui/left-navbar";
 import { useProjectStore } from "@/store/project.store";
 import React, { useEffect } from "react";
@@ -24,7 +24,7 @@ export default function DashBoard({ children, params }: ProjectPageParams) {
   }, [])
 
   return (
-    <section className="flex grow gap-1 py-8 md:py-0">
+    <section className="flex grow gap-1 py-0 md:py-0">
       {/* <div className="basis-2/6"> */}
         <LeftSideNav />
       {/* </div> */}

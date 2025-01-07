@@ -49,7 +49,7 @@ const ProjectsTableView: React.FC<ProjectTableProps> = ({ data, onEditClick }) =
   function action(id: any) {
     return (
       <span
-        onClick={() => {}}
+        onClick={() =>{onEditClick(id)}}
       >
         <ActionEdit size={21} width={24} height={24} />
       </span>

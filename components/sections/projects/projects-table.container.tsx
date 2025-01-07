@@ -27,9 +27,12 @@ export const ProjectsTableContainer = () => {
 
   const onEditClick = (projectId: any) => {
     // get by id api call
+    console.log("projectId",projectId);
+    
     // setEditedProjectData
     // setIsOpen for edit modal view
     //toggleIsOpenNewModal();
+    toggleIsOpenNewModal();
   };
 
   return (

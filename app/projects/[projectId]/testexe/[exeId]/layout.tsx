@@ -1,6 +1,6 @@
 'use client'
 import LeftSideNav from "@/components/ui/left-navbar";
-import { Navbar,  } from "@/components/navbar";
+import { Navbar,  } from "@/components/ui/navbar";
 
 export default function TestExe({
     children,

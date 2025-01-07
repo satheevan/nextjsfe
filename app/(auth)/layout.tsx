@@ -2,8 +2,21 @@
 import { Heading } from "@/components/ui/heading";
 import Image from "next/image";
 import dashboardImg from "@/asset/images/login/dashboard.png";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Login({ children }: { children: React.ReactNode }) {
+  const router = useRouter()
+  const checkStatus=()=>{
+    const token = Cookies.get("authToken")
+    if(token){
+      router.push('/')
+    }
+  }
+  useEffect(()=>{
+    checkStatus()
+  },[])
   return (
     <section className="flex max-sm:flex-col max-md:flex-row grow gap-1 py-0">
       <div className="mx-3 basis-2/5">{children}</div>

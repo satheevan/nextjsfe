@@ -1,6 +1,5 @@
 'use client'
-import { Navbar } from '@/components/navbar';
-import LeftSideNav from '@/components/ui/left-navbar';
+import { Navbar } from '@/components/ui/navbar';
 export default function DashBoard({
   children,
 }: {
