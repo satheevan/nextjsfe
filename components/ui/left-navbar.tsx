@@ -9,58 +9,89 @@ import {
   TestExe,
   TestSuites,
   ToggleButton,
+  ToggleButtonHide,
 } from "../icons/menu";
 import { Logo } from "../icons/logo";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useProjectStore } from "../../store/project.store";
 
 function LeftSideNav() {
+  const [menuItems, setMenuItems] = useState([]);
+  const [shortHand, setShortHand] = useState(false);
   const navigate = useRouter();
+
+  const { currentProjectId } = useProjectStore();
+
+  const menus = [
+    {
+      key: "dashboard",
+      name: "DashBoard",
+      path: `/projects/${currentProjectId}/dashboard`,
+      icon: <Dashboard />,
+    },
+    {
+      key: "suits",
+      name: "Test Suites",
+      path: `/projects/${currentProjectId}/testsuites`,
+      icon: <TestSuites />,
+    },
+    {
+      key: "execution",
+      name: "Test Exec",
+      path: `/projects/${currentProjectId}/testexe`,
+      icon: <TestExe />,
+    },
+    {
+      key: "dux",
+      name: "DUX",
+      path: `/projects/${currentProjectId}/dux`,
+      icon: <DUX />,
+    },
+    { key: "synthetic", name: "Synthetic", path: "", icon: <Synthetic /> },
+  ];
+  const configuration = [
+    {
+      key: "productchange",
+      name: "Product Changes",
+      path: `/projects/${currentProjectId}/dashboard`,
+      icon: <ProductChanges />,
+    },
+    {
+      key: "invitemember",
+      name: "Invite Members",
+      path: `/projects/${currentProjectId}/dashboard`,
+      icon: <InviteMembers />,
+    },
+  ];
+
   return (
-    <div className="hidden sm:block w-60 pt-2 bg-leftSideBar">
-      <div className=" my-5 mb-8 ml-5 relative ...">
+    <div
+      className={`hidden sm:block ${shortHand ? "w-20" : "w-60"} pt-2 bg-leftSideBar`}
+    >
+      <div className={` my-5 mb-8 ${shortHand ? "ml-5" : "ml-5"} relative ...`}>
         <Logo className="text-center" />
         <span
-          className="absolute -right-4 -top-1.5 ... z-50"
-          onClick={() => console.log(navigate)}
+          className="absolute -right-4 -top-1.5 cursor-pointer z-50"
+          onClick={() => setShortHand(!shortHand)}
         >
-          <ToggleButton />
+          {!shortHand ? <ToggleButton /> :<ToggleButtonHide rotate="100" />}
         </span>
       </div>
       <div className="flex flex-col grow justify-between gap-60">
         <div className="flex flex-col">
           <Listbox aria-label="Navigation menu">
-            <ListboxItem
-              key="dashboard"
-              href="/projects/[projectId]/dashboard"
-            >
-              <div className="flex items-center ml-5 gap-2 text-white">
-                <Dashboard /> DashBoard
-              </div>
-            </ListboxItem>
-            <ListboxItem key="suits" href="/projects/[projectId]/testsuites">
-              <div className="flex items-center ml-5 gap-2 text-white">
-                <TestSuites /> Test Suites
-              </div>
-            </ListboxItem>
-            <ListboxItem key="execution" href="/projects/[projectId]/testexe">
-              <div className="flex items-center ml-5 gap-2 text-white">
-                <TestExe /> Test Exec
-              </div>
-            </ListboxItem>
-            <ListboxItem key="dux" href="/projects/[projectId]/dux">
-              <div className="flex items-center ml-5 gap-2 text-white">
-                <DUX /> DUX
-              </div>
-            </ListboxItem>
-            <ListboxItem key="synthetic" href="">
-              <div className="flex items-center ml-5 gap-2 text-white">
-                <Synthetic /> Synthetic
-              </div>
-            </ListboxItem>
+            {menus.map((menu, index) => (
+              <ListboxItem key={menu.key} href={menu.path}>
+                <div className="flex items-center ml-5 gap-2 text-white">
+                  {menu.icon} {shortHand ? "" : menu.name}
+                </div>
+              </ListboxItem>
+            ))}
           </Listbox>
         </div>
         <div>
-          <Listbox>
+          {/* <Listbox>
             <ListboxItem key="productchange" href="">
               <div className="flex items-center ml-5 gap-2 text-white">
                 <ProductChanges /> Product Changes
@@ -71,7 +102,18 @@ function LeftSideNav() {
                 <InviteMembers /> Invite Members
               </div>
             </ListboxItem>
-          </Listbox>
+          </Listbox> */}
+          <div className="flex flex-col">
+            <Listbox aria-label="Navigation menu">
+              {configuration.map((menu, index) => (
+                <ListboxItem key={menu.key} href={menu.path}>
+                  <div className="flex items-center ml-5 gap-2 text-white">
+                    {menu.icon} {shortHand ? "" : menu.name}
+                  </div>
+                </ListboxItem>
+              ))}
+            </Listbox>
+          </div>
         </div>
       </div>
     </div>

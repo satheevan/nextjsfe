@@ -39,7 +39,7 @@ export default function DuxRequestId1() {
         <Heading>DUX{"> Request"}</Heading>
       </div>
       {/* <TabView tabList={tabList} handleTabView={handlerTabView} /> */}
-      <Tabs items={tabs} variant="light" color="primary">
+      <Tabs items={tabs} variant="light" color="primary" className="pt-3">
         {(item) => (
           <Tab id={item?.id} title={item?.label}>
             {item?.content}

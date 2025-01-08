@@ -51,7 +51,7 @@ const columns = [
   },
 ];
 
-export default function App() {
+export default function SuiteTable() {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set(["2"]));
   
   return (

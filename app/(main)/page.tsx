@@ -1,40 +1,13 @@
-"use client";
-import { CreateProject } from "@/components/ui/model/projects.model";
+// "use client";
 import { ProjectCardItems } from "@/components/ui/card/project-card";
-import { MainProjectData } from "@/data/tableProject";
 import { Heading } from "@/components/ui/heading";
-import ProjectTable from "../../components/ui/table/project.table";
-import { useEffect } from "react";
-import { ApiProjectList } from "@/apis/projectApis";
-import { useProjectStore } from "@/store/project.store";
+import { ProjectsTableContainer } from "@/components/sections/projects/projects-table.container";
 
 
-console.log("coluumn data", MainProjectData.ProjectColumns);
+// console.log("coluumn data", MainProjectData.ProjectColumns);
 // const columnData:ColumnData=MainProjectData.ProjectColumns;
-export default function Main() {
+export default function MainPage() {
 
-  const {projects,setProjects}= useProjectStore()
-
-  const fetchProjectList = async () => {
-    try {
-      const result = await ApiProjectList();
-      const projectData = result.map((data:any)=>({
-        id:data.id,
-        projectName:data.name,
-        totalTest:data.createdBy,
-        totalSuits:data.createdBy
-      }));
-      setProjects(projectData)
-    } catch (err) {
-      console.log("Error on fetch the project data", err);
-    }
-  };
-
-  useEffect(() => {
-    fetchProjectList();
-  }, []);
-
-  console.log("ProjectDate",projects);
   
   return (
     <div className="flex flex-col grow">
@@ -44,12 +17,7 @@ export default function Main() {
         <ProjectCardItems />
       </header>
       <main className="mt-10">
-        <div className="flex justify-between">
-          <Heading>Project Listing</Heading>
-          <CreateProject />
-        </div>
-        <p></p>
-        <ProjectTable data={projects.length>0?projects:[]}/>
+        <ProjectsTableContainer />
       </main>
     </div>
   );

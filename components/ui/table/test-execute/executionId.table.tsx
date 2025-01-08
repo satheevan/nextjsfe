@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { PaginationContainer } from "../../pagination-container";
 import { Updown } from "@/components/icons/updown";
+import { useProjectStore } from "@/store/project.store";
 
 const columns = [
   {
@@ -64,6 +65,7 @@ function columnLable(label: string, toggle: boolean) {
   );
 }
 const ExecuteIdTable: React.FC<ProjectTableProps> = ({ data }) => {
+  const { currentProjectId } = useProjectStore();
   function Status(value: string) {
     return (
       <div>
@@ -113,7 +115,7 @@ const ExecuteIdTable: React.FC<ProjectTableProps> = ({ data }) => {
       key: "1",
       testsuitename: (
         <Link
-          href={`/projects/inventory/testexe/1`}
+          href={`/projects/${currentProjectId}/testexe/1`}
           className="text-xs font-medium text-btnColorProject"
         >
           Smoke Test(10)
@@ -128,7 +130,7 @@ const ExecuteIdTable: React.FC<ProjectTableProps> = ({ data }) => {
       key: "2",
       testsuitename: (
         <Link
-          href={`/projects/inventory/testexe/1`}
+          href={`/projects/${currentProjectId}/testexe/1`}
           className="text-xs font-medium text-btnColorProject"
         >
           Inventory(5)
@@ -143,7 +145,7 @@ const ExecuteIdTable: React.FC<ProjectTableProps> = ({ data }) => {
       key: "3",
       testsuitename: (
         <Link
-          href={`/projects/inventory/testexe/1`}
+          href={`/projects/${currentProjectId}/testexe/1`}
           className="text-xs font-medium text-btnColorProject"
         >
           Smoke Test
@@ -158,7 +160,7 @@ const ExecuteIdTable: React.FC<ProjectTableProps> = ({ data }) => {
       key: "4",
       testsuitename: (
         <Link
-          href={`/projects/inventory/testexe/1`}
+          href={`/projects/${currentProjectId}/testexe/1`}
           className="text-xs font-medium text-btnColorProject"
         >
           Smoke Test

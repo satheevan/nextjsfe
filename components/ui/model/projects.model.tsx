@@ -18,8 +18,7 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 
-export function CreateProject() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+export function CreateProject({ isOpenModal, onOpenChange }: { isOpenModal?: boolean, onOpenChange: ()=> void }) {
   const [isEnvironmentCount, setIsEnviromentCount] = useState(1);
   const [environmentValue, setEnviromentValue] = useState([]);
 
@@ -38,10 +37,7 @@ export function CreateProject() {
 
   return (
     <>
-      <Button onPress={onOpen} color="primary">
-        Create Project
-      </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+      <Modal isOpen={isOpenModal} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
             <>

@@ -1,33 +1,20 @@
 import api from "@/config/axios";
-
-let routeId = "";
-
-function queryString(id: any) {
-  routeId = id;
-  return routeId;
-}
-const apiTestSuites = {
-  projects: `/projects/`,
-  testSuiteList: `/test-suits?isDraft=false/`,
-};
+import apiEndpoints from "./apiEndpoints";
 
 // Example: Fetch user profile
-export const ApiTestSuitesList = async (id: any) => {
+export const ApiTestSuitesList = async (projectId?: number) => {
+  console.log("api passing Id",projectId);
   const response = await api.get(
-    apiTestSuites.projects + id + apiTestSuites.testSuiteList
+    `/${apiEndpoints?.projects}/${projectId}/${apiEndpoints?.testSuites}`
   );
   return response.data;
 };
 
 // Example: Update user profile
-export const updateProjectItems = async (data: Record<string, any>) => {
-  const response = await api.put("/user/profile", data);
-  return response.data;
-};
-
-// Example: Fetch a list of items
-export const fetchProjectItems = async () => {
-  const response = await api.get("/items");
+export const ApiTestSuitesDelete = async (id: any, projectId?: number) => {
+  const response = await api.delete(
+    `/${apiEndpoints.projects}/${projectId}/${apiEndpoints.project.testSuiteDelete}/${id}`
+  );
   return response.data;
 };
 

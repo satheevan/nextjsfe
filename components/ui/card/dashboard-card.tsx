@@ -17,6 +17,7 @@ const cardItems = [
     icons: <ProjectSuits size={48} width={48} />,
     count: 13,
     cardName: "Total Suites",
+    key: "totalTestSuites"
   },
   {
     icons: <ProjectTest size={48} width={48} />,
