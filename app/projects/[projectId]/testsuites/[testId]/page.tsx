@@ -25,7 +25,7 @@ export default function TestSuits() {
     <section className="flex flex-col grow md:py-3">
       <div className="flex flex-wrap justify-between mr-4">
         <Heading>Existing Test Suites</Heading>
-        <DropdownList title="create" placeHolder={"Add Test Case"} />
+        {/* <DropdownList title="create" placeHolder={"Add Test Case"} /> */}
         <CreateNewTest isOpenModal={isCreateTest} />
         {/* <DropdownList title={"Add Test Case"}/> */}
       </div>

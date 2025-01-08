@@ -11,26 +11,24 @@ import Image from "next/image";
 import { ActionDelete } from "@/components/icons/actions";
 import { useRouter } from "next/navigation";
 import { TestSuite } from "@/types/test-suite";
+import { DATE_FORMATS, formatDate } from "@/utils/dateFormat";
 
 interface ICard {
   cardItems: TestSuite[];
-  onDelete: (id: any) => {};
+  onDelete: (id: any) => void;
+  projectId:number
 }
 
 export const SuitesCardItems: React.FC<ICard> = ({
   onDelete,
   cardItems,
+  projectId,
   ...props
 }) => {
   console.log("cards :", cardItems, typeof cardItems);
-  // const [cardList, setCardList] = useState([])
-  // const [cardList, setCardList] = React.useState<ICard[]>([]);
   const route = useRouter();
 
-  const getInitalValue = () => {
-    // const cardListValue: ICard[] = props.cardItems;
-    // setCardList(cardItems);
-  };
+  const getInitalValue = () => {};
   React.useEffect(() => {
     getInitalValue();
   }, []);
@@ -38,11 +36,11 @@ export const SuitesCardItems: React.FC<ICard> = ({
 
   const handlerSuiteDetials = (value: any) => {
     console.log("query params", value);
-    route.push(`/projects/[project]/testsuites/${value}`);
+    route.push(`/projects/${projectId}/testsuites/${value}`);
   };
   const handleDelete = (id: any) => {
     console.log("DeleteId", id);
-    onDelete(id);
+    onDelete(id)
   };
 
   return (
@@ -58,10 +56,8 @@ export const SuitesCardItems: React.FC<ICard> = ({
                 </div>
                 <div>
                   <span
-                  className="cursor-pointer"
-                    onClick={() => {
-                      handleDelete(item?.id);
-                    }}
+                    className="cursor-pointer"
+                    onClick={()=>{handleDelete(item?.id)}}
                   >
                     <ActionDelete height={24} width={24} />
                   </span>
@@ -69,7 +65,7 @@ export const SuitesCardItems: React.FC<ICard> = ({
               </div>
               <div className="flex justify-between text-sm text-gray-500 mt-7 mb-2">
                 <div>Create Date:</div>
-                <div>{item?.createdAt}</div>
+                <div>{formatDate(item?.createdAt, DATE_FORMATS.FULL_DATE)}</div>
               </div>
               <hr></hr>
               <div className="flex justify-between gap-2 mt-2">

@@ -13,6 +13,7 @@ import { ActionEdit } from "../../../components/icons/actions";
 import Link from "next/link";
 import { Project } from "@/types/project";
 import { useProjectStore } from "@/store/project.store";
+import { DATE_FORMATS, formatDate } from "@/utils/dateFormat";
 
 const columns = [
   {
@@ -49,6 +50,7 @@ const ProjectsTableView: React.FC<ProjectTableProps> = ({ data, onEditClick }) =
   function action(id: any) {
     return (
       <span
+        className="cursor-pointer p-0 m-0 text-center"
         onClick={() =>{onEditClick(id)}}
       >
         <ActionEdit size={21} width={24} height={24} />
@@ -66,7 +68,7 @@ const ProjectsTableView: React.FC<ProjectTableProps> = ({ data, onEditClick }) =
       </Link>
     ),
     description: project.description,
-    createdAt: project.createdAt,
+    createdAt: formatDate(project.createdAt,DATE_FORMATS.SHORT_DATE),
     action: action(project.id),
   }));
 

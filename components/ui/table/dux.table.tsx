@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { PaginationContainer } from "../pagination-container";
 import { Updown } from "@/components/icons/updown";
+import { useProjectStore } from "@/store/project.store";
 
 const columns = [
   {
@@ -60,6 +61,7 @@ function columnLable(label: string, toggle: boolean) {
   );
 }
 const DuxTable: React.FC<ProjectTableProps> = ({ data }) => {
+  const { currentProjectId } = useProjectStore();
 
   function Status(value: string) {
     return (
@@ -110,7 +112,7 @@ const DuxTable: React.FC<ProjectTableProps> = ({ data }) => {
       key: "1",
       request: (
         <Link
-          href={`/projects/inventory/dux/1`}
+          href={`/projects/${currentProjectId}/dux/1`}
           className="text-xs font-medium text-btnColorProject"
         >
           https://dev.testdynamiz.com/
@@ -124,7 +126,7 @@ const DuxTable: React.FC<ProjectTableProps> = ({ data }) => {
       key: "2",
       request: (
         <Link
-          href={`/projects/inventory/dux/1`}
+          href={`/projects/${currentProjectId}/dux/1`}
           className="text-xs font-medium text-btnColorProject"
         >
           https://dev.testdynamiz.com/
@@ -138,7 +140,7 @@ const DuxTable: React.FC<ProjectTableProps> = ({ data }) => {
       key: "3",
       request: (
         <Link
-          href={`/projects/inventory/dux/1`}
+          href={`/projects/${currentProjectId}/dux/1`}
           className="text-xs font-medium text-btnColorProject"
         >
           https://dev.testdynamiz.com/
@@ -152,7 +154,7 @@ const DuxTable: React.FC<ProjectTableProps> = ({ data }) => {
       key: "4",
       request: (
         <Link
-          href={`/projects/inventory/dux/1`}
+          href={`/projects/${currentProjectId}/dux/1`}
           className="text-xs font-medium text-btnColorProject"
         >
           https://dev.testdynamiz.com/

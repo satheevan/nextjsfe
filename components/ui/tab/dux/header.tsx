@@ -7,11 +7,11 @@ const Header = () => {
       label: "Requested Url",
       value: "https://opencart.testdynamiz.com/index.php",
     },
-    { label: "Request Method", value: "GET" },
-    { label: "Request Method", value: "GET" },
-    { label: "Status Code", value: "200 Ok" },
-    { label: "Remote Address", value: "52.6.209.46:443" },
-    { label: "Referrer Policy", value: "strict-origin-when-cross-origin" },
+    { label: "Method", value: "GET" },
+    { label: "Method", value: "GET" },
+    { label: "Status", value: "200 Ok" },
+    { label: "IPAddress", value: "52.6.209.46:443" },
+    { label: "ReferrerPolicy", value: "strict-origin-when-cross-origin" },
   ];
   const Request = [
     {
@@ -27,7 +27,7 @@ const Header = () => {
 
   return (
     <div>
-      <div className="mt-6 flex flex-col justify-between">
+      {/* <div className="mt-6 flex flex-col justify-between">
         <Heading>{"General"}</Heading>
         <DefaultCard className={"mt-3 flex"}>
           <div className="flex justify-between p-0 max-sm:flex-col">
@@ -42,7 +42,7 @@ const Header = () => {
             ))}
           </div>
         </DefaultCard>
-      </div>
+      </div> */}
       <div className="mt-3 flex">
         <div className="flex flex-col basis-1/2 p-3">
           <Heading>{"Request Header"}</Heading>

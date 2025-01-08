@@ -43,7 +43,7 @@ export default function ProjectDashboard() {
   }, []);
 
   return (
-    <section className="flex flex-col grow md:py-3">
+    <section className="flex flex-col grow md:">
       <div className="flex justify-between">
         <Heading>Dashboard</Heading>
         <CreateNewSuites/>

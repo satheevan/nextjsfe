@@ -9,6 +9,7 @@ import {
   TestExe,
   TestSuites,
   ToggleButton,
+  ToggleButtonHide,
 } from "../icons/menu";
 import { Logo } from "../icons/logo";
 import { useRouter } from "next/navigation";
@@ -64,10 +65,6 @@ function LeftSideNav() {
     },
   ];
 
-  useEffect(() => {
-    // setMenuItems(menus)
-  }, []);
-
   return (
     <div
       className={`hidden sm:block ${shortHand ? "w-20" : "w-60"} pt-2 bg-leftSideBar`}
@@ -78,7 +75,7 @@ function LeftSideNav() {
           className="absolute -right-4 -top-1.5 cursor-pointer z-50"
           onClick={() => setShortHand(!shortHand)}
         >
-          {!shortHand ? <ToggleButton /> :<ToggleButton rotate="100" />}
+          {!shortHand ? <ToggleButton /> :<ToggleButtonHide rotate="100" />}
         </span>
       </div>
       <div className="flex flex-col grow justify-between gap-60">

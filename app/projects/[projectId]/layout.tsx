@@ -30,7 +30,7 @@ export default function DashBoard({ children, params }: ProjectPageParams) {
       {/* </div> */}
       <div className="basis-2/6 flex flex-col grow md:py-0">
         <Navbar />
-        <div className="mx-5 flex grow">{children}</div>
+        <div className="mx-5 flex grow py-3">{children}</div>
       </div>
     </section>
   );

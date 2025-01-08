@@ -93,7 +93,7 @@ export const Navbar = () => {
               <ProjectLogo />
             </span>
             <NavbarContent>
-              <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+              <NavbarItem className="hidden sm:flex">{searchInput}</NavbarItem>
             </NavbarContent>
           </div>
         )}
@@ -145,14 +145,16 @@ export const Navbar = () => {
           </div>
         </NavbarItem>
       </NavbarContent>
-
-      {/* <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal aria-label="Github" href={siteConfig.links.github}>
+{/*  */}
+      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+        {/* <Link isExternal aria-label="Github" href={siteConfig.links.github}>
           <GithubIcon className="text-default-500" />
-        </Link>
+        </Link> */}
         <ThemeSwitch />
+        <span >
         <NavbarMenuToggle />
-      </NavbarContent> */}
+        </span>
+      </NavbarContent>
     </NextUINavbar>
   );
 };
